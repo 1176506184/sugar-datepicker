@@ -1,0 +1,268 @@
+.sugar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 2005;
+    transition: 0.3s;
+}
+
+.sugar-datepicker-wrapper {
+    z-index: 2006;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: auto;
+    padding: 1.5rem 1rem;
+    color: #101010;
+    width: 100%;
+    max-height: 80%;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    border-radius: 1rem 1rem 0 0;
+    transition: 0.3s;
+}
+
+.sugar-header-wrapper {
+    width: 100%;
+    font-size: .373333rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sugar-tabs {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 7.5rem;
+    height: 100%;
+    padding: 0.125rem;
+    border-radius: 1.28rem;
+    background: #f4f4f4;
+}
+
+.sugar-today {
+    position: absolute;
+    left: 125px;
+    margin-left: 20px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #f4f4f4;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 宋体, serif;
+}
+
+.sugar-header-tab {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    flex-shrink: 0;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 1.875rem;
+    border-radius: 1.875rem;
+    font-family: 宋体, serif;
+    font-weight: bold;
+    color: #000;
+    font-size: 0.9375rem;
+}
+
+.sugar-header-tab-selected {
+    background: #fff;
+}
+
+.sugar-datepicker-confirm {
+    height: 2.25rem;
+    line-height: 2.25rem;
+    width: 4.0625rem;
+    color: #F7D3A1;
+    background: #000;
+    font-family: 宋体, serif;
+    font-size: 0.9375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2.25rem;
+}
+
+.sugar-datepicker-search {
+    height: 2.1875rem;
+    width: 100%;
+    background: #f4f4f4;
+    border-radius: 2.0625rem;
+    margin-top: 0.625rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sugar-datepicker-search input {
+    border: none;
+    outline: none;
+    text-decoration: none;
+    background: transparent;
+    width: calc(100% - 4.0625rem);
+    box-sizing: border-box;
+    font-size: 0.8125rem;
+    padding-left: 0.625rem;
+}
+
+.sugar-datepicker-search input::placeholder {
+    color: #d1d1d1;
+}
+
+.sugar-datepicker-search div {
+    width: 3.4375rem;
+    height: 1.875rem;
+    line-height: 1.875rem;
+    background: #fff;
+    border-radius: 1.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9375rem;
+    font-family: 宋体, serif;
+    color: #000;
+}
+
+.sugar-picker-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 2.5rem;
+    font-size: 0.875rem;
+    color: #3e3c3d;
+    border-top: .013333rem solid #f4f4f4;
+}
+
+.sugar-picker-container {
+    overflow: hidden;
+}
+
+.sugar-picker-columns {
+    position: relative;
+    cursor: grab;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+
+.sugar-picker_hairline {
+    position: absolute;
+    pointer-events: none;
+    left: 0 !important;
+    right: 0 !important;
+    height: 3rem;
+    top: 50%;
+    z-index: 0;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background: #f0f0f0;
+    border-radius: 0.3125rem;
+}
+
+.sugar-picker__mask {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(180deg, hsla(0, 0%, 100%, .9), hsla(0, 0%, 100%, .4)), linear-gradient(0deg, hsla(0, 0%, 100%, .9), hsla(0, 0%, 100%, .4));
+    background-repeat: no-repeat;
+    background-position: top, bottom;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    background-size: 100% 84px;
+    background-image: linear-gradient(180deg, #fff, hsla(0, 0%, 100%, .7)), linear-gradient(0deg, #fff, hsla(0, 0%, 100%, .7)) !important;
+}
+
+.sugar-picker-column {
+    -webkit-transition-timing-function: cubic-bezier(.23, 1, .68, 1);
+    transition-timing-function: cubic-bezier(.23, 1, .68, 1);
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: hidden;
+    font-size: 1rem;
+    position: relative;
+    z-index: 3;
+}
+
+.sugar-picker-column__wrapper {
+    transition-timing-function: cubic-bezier(.23, 1, .68, 1);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+.sugar-picker-column__item.active {
+    font-size: 1rem;
+}
+
+.sugar-picker-column__item {
+    font-size: 0.8125rem;
+    font-weight: bold;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding: 0 0.25rem;
+    color: #000;
+    user-select: none; /* 标准语法 */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+@media (min-width: 768px) {
+    .sugar-header-tab {
+        cursor: pointer;
+    }
+
+    .sugar-datepicker-search div {
+        cursor: pointer;
+    }
+
+    .sugar-datepicker-confirm {
+        cursor: pointer;
+    }
+}

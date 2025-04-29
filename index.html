@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:s-use="http://www.w3.org/1999/xhtml" xmlns:s-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+<style>
+
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+
+</style>
+<link rel="stylesheet" href="/datePicker.css"></link>
+<script src="/sugar.js"></script>
+<script src="/dist/datePicker.js"></script>
+<body>
+<input id="init"/>
+</body>
+
+<script>
+    const date = datePicker(document.querySelector('#init'), (value) => {
+            console.log(value);
+    })
+</script>
+</html>

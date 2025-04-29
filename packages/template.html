@@ -1,0 +1,89 @@
+<div s-if="show">
+    <div class="sugar-datepicker-wrapper" :style="'bottom:' + top + 'vh'">
+        <div class="sugar-header-wrapper">
+            <div class="sugar-tabs">
+                <div @click="setType(0)"
+                     :class="type == 1 ? 'sugar-header-tab':'sugar-header-tab sugar-header-tab-selected'">
+                    公曆
+                </div>
+                <div @click="setType(1)"
+                     :class="type == 0 ? 'sugar-header-tab':'sugar-header-tab sugar-header-tab-selected'">
+                    農曆
+                </div>
+            </div>
+            <div class="sugar-today" s-if="!isToday" @click="goToday">
+                今
+            </div>
+            <div class="sugar-datepicker-confirm" @click="confirm">
+                確定
+            </div>
+        </div>
+        <div class="sugar-datepicker-search" s-if="type === 0">
+            <input autocomplete="off" :value="inputValue" @input="setInputValue"
+                   placeholder="輸入出生年月日時分(格式200001010255)"/>
+            <div @click="goDate">查詢</div>
+        </div>
+        <div class="sugar-picker-header" style="margin-top: 20px;">
+            <div>年</div>
+            <div>月</div>
+            <div>日</div>
+            <div>時</div>
+            <div>分</div>
+        </div>
+        <div class="sugar-picker-container">
+            <div class="sugar-picker-columns" style="height: 216px">
+                <div class="sugar-picker-column" @touchstart="touchstartYear" @touchmove="touchmoveYear" @wheel="wheelYear"
+                     @touchend="touchendYear" @touchcancel="touchendYear">
+                    <ul class="sugar-picker-column__wrapper" instance="yearRef">
+                        <li :class="activeYear == item ? 'sugar-picker-column__item active' : 'sugar-picker-column__item'"
+                            s-for="(item,index) in years" role="button"
+                            style="height: 43px">
+                            {{item}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="sugar-picker-column" @touchstart="touchstartMonth" @touchmove="touchmoveMonth" @wheel="wheelMonth"
+                     @touchend="touchendMonth" @touchcancel="touchendMonth">
+                    <ul class="sugar-picker-column__wrapper" instance="monthRef">
+                        <li :class="activeMonth == item ? 'sugar-picker-column__item active' : 'sugar-picker-column__item'" s-for="(item,index) in months" role="button"
+                            style="height: 43px">
+                            {{item}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="sugar-picker-column" @touchstart="touchstartDay" @touchmove="touchmoveDay" @wheel="wheelDay"
+                     @touchend="touchendDay" @touchcancel="touchendDay">
+                    <ul class="sugar-picker-column__wrapper" instance="dayRef">
+                        <li :class="activeDay == item ? 'sugar-picker-column__item active' : 'sugar-picker-column__item'" s-for="(item,index) in days" role="button"
+                            style="height: 43px">
+                            {{item}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="sugar-picker-column" @touchstart="touchstartHours" @touchmove="touchmoveHours" @wheel="wheelHour"
+                     @touchend="touchendHours" @touchcancel="touchendHours">
+                    <ul class="sugar-picker-column__wrapper" instance="hoursRef">
+                        <li :class="activeHours == item ? 'sugar-picker-column__item active' : 'sugar-picker-column__item'" s-for="(item,index) in hours" role="button"
+                            style="height: 43px">
+                            {{item}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="sugar-picker-column" @touchstart="touchstartMinute" @touchmove="touchmoveMinute"  @wheel="wheelMinute"
+                     @touchend="touchendMinute" @touchcancel="touchendMinute">
+                    <ul class="sugar-picker-column__wrapper" instance="minuteRef">
+                        <li :class="activeMinutes == item ? 'sugar-picker-column__item active' : 'sugar-picker-column__item'" s-for="(item,index) in minutes" role="button"
+                            style="height: 43px">
+                            {{item}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="sugar-picker_hairline" instance="hairline"></div>
+                <div class="sugar-picker__mask"></div>
+            </div>
+        </div>
+    </div>
+    <div class="sugar-overlay" @click="close" :style="'opacity:' + opacity" @touchmove="noAction">
+
+    </div>
+</div>
