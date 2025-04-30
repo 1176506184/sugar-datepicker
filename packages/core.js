@@ -160,6 +160,8 @@ export default function createElement(inputEl, callback) {
                     if (dayMap[activeDay.value] > days.value.length) {
                         setActiveDay(days.value[days.value.length - 1]);
                         transformDayNum = goActive(days.value, activeDay.value, dayRef.value, transformDayNum);
+                    } else {
+                        transformDayNum = goActive(days.value, activeDay.value, dayRef.value, transformDayNum);
                     }
                 }
             }, [activeMonth], true);
@@ -183,11 +185,11 @@ export default function createElement(inputEl, callback) {
                     setMonths(LunarYear.fromYear(lunar.getYear()).getMonthsInYear().map((r) => {
                         return monthName(r.getMonth());
                     }));
+                    setActiveDay(dayName(lunar.getDay()));
                     setActiveYear(lunar.getYear());
                     setActiveMonth(monthName(lunar.getMonth()));
                     transformYearNum = goActive(years, activeYear.value, yearRef.value, transformYearNum);
                     transformMonthNum = goActive(months.value, activeMonth.value, monthRef.value, transformMonthNum);
-                    setActiveDay(dayName(lunar.getDay()));
                 } else {
 
                     const solar = Lunar.fromYmd(activeYear.value, monthMap[activeMonth.value], dayMap[activeDay.value]).getSolar();
@@ -503,7 +505,7 @@ export default function createElement(inputEl, callback) {
                 e.preventDefault();
             }
 
-             function wheelMinute(e) {
+            function wheelMinute(e) {
                 const index = minutes.indexOf(activeMinutes.value)
                 if (e.deltaY > 2 && index < (minutes.length - 1)) {
                     setActiveMinutes(minutes[index + 1]);
@@ -600,7 +602,7 @@ export default function createElement(inputEl, callback) {
                 }
 
 
-                if (minute >= 0 && minute <= 59) {
+                if (minute >= 0 && minute <= 59 && minute !== "") {
                     setActiveMinutes(minute);
                     transformMinuteNum = goActive(minutes, activeMinutes.value, minuteRef.value, transformMinuteNum);
                 } else {
