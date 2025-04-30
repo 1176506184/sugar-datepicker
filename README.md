@@ -8,6 +8,7 @@
 
 ### 使用
     <input id="init"/>
+    <input id="init" fixed="true"/> // pc模式自动定位
     <script>
         const date = datePicker(document.querySelector('#init'), (value) => {
                 console.log(value);//包含农历和公历

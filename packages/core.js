@@ -83,8 +83,41 @@ function monthName(month) {
     return (month < 0 ? "闰" : "") + monthName[Math.abs(month) - 1] + "月";
 }
 
+function calculateFixedPosition(el) {
+    const rect = el.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const fixedNodeWidth = 414;
+    const fixedNodeHeight = 406;
 
-export default function createElement(inputEl, callback) {
+    let left;
+
+    // 尝试左侧对齐
+    if (rect.left >= 0 && rect.left + fixedNodeWidth <= viewportWidth) {
+        left = rect.left;
+    }
+    // 尝试右侧对齐
+    else if (rect.right - fixedNodeWidth >= 0) {
+        left = rect.right - fixedNodeWidth;
+    }
+    // 默认居中
+    else {
+        left = (viewportWidth - fixedNodeWidth) / 2;
+    }
+
+    // 计算 top 值，保持垂直方向不变
+    let top = rect.top - fixedNodeHeight - 20;
+    if (top < 0) {
+        top = rect.bottom + 20;
+    }
+    if (top + fixedNodeHeight > window.innerHeight) {
+        top = (window.innerHeight - fixedNodeHeight) / 2;
+    }
+
+    return {top, left};
+}
+
+
+export default function createElement(inputEl, callback, fixed = false) {
     const node = document.createElement('div');
     node.innerHTML = template;
     document.body.append(node);
@@ -102,13 +135,24 @@ export default function createElement(inputEl, callback) {
             const [activeHours, setActiveHours] = useState((new Date().getHours()) < 10 ? '0' + new Date().getHours() : new Date().getHours());
             const [activeMinutes, setActiveMinutes] = useState((new Date().getMinutes()) < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes());
             const [isToday, setIsToday] = useState(true);
+            const ev = calculateFixedPosition(inputEl);
+            const [style, setStyle] = useState(`;top:${ev.top}px;left:${ev.left}px`);
+            if (fixed) {
+                document.body.addEventListener('click', () => {
+                    setShow(false);
+                })
+
+                window.addEventListener('scroll', () => {
+                    setShow(false);
+                })
+
+            }
 
             useEffect(() => {
                 if (type.value === 0) {
                     const yearToday = new Date().getFullYear();
                     const monthToday = (new Date().getMonth() + 1) < 10 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1);
                     const dayToday = (new Date().getDate()) < 10 ? '0' + new Date().getDate() : new Date().getDate();
-                    console.log(yearToday, monthToday, dayToday, activeYear.value, activeMonth.value, activeDay.value)
                     setIsToday(yearToday.toString() === activeYear.value.toString() && monthToday.toString() === activeMonth.value.toString() && dayToday.toString() === activeDay.value.toString());
                 } else {
                     const yearToday = new Date().getFullYear();
@@ -188,8 +232,10 @@ export default function createElement(inputEl, callback) {
                     setActiveDay(dayName(lunar.getDay()));
                     setActiveYear(lunar.getYear());
                     setActiveMonth(monthName(lunar.getMonth()));
-                    transformYearNum = goActive(years, activeYear.value, yearRef.value, transformYearNum);
-                    transformMonthNum = goActive(months.value, activeMonth.value, monthRef.value, transformMonthNum);
+                    nextTick(() => {
+                        transformYearNum = goActive(years, activeYear.value, yearRef.value, transformYearNum);
+                        transformMonthNum = goActive(months.value, activeMonth.value, monthRef.value, transformMonthNum);
+                    })
                 } else {
 
                     const solar = Lunar.fromYmd(activeYear.value, monthMap[activeMonth.value], dayMap[activeDay.value]).getSolar();
@@ -748,7 +794,12 @@ export default function createElement(inputEl, callback) {
                 e.preventDefault();
             }
 
+            function stop() {
+
+            }
+
             return {
+                stop,
                 type,
                 setType,
                 years,
@@ -800,7 +851,9 @@ export default function createElement(inputEl, callback) {
                 wheelMonth,
                 wheelDay,
                 wheelHour,
-                wheelMinute
+                wheelMinute,
+                fixed,
+                style
             }
         }
     })

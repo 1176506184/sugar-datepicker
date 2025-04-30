@@ -17,13 +17,13 @@
 <link rel="stylesheet" href="/datePicker.css"></link>
 <script src="/sugar.js"></script>
 <script src="/dist/datePicker.js"></script>
-<body>
-<input id="init"/>
+<body style="height: 200vh">
+<input id="init" fixed="true" style="margin-top: 100px;right: 50px;position: fixed;"/>
 </body>
 
 <script>
     const date = datePicker(document.querySelector('#init'), (value) => {
-            console.log(value);
+        console.log(value);
     })
 </script>
 </html>
