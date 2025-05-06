@@ -42,6 +42,7 @@
     "rollup-plugin-string": "^3.0.0",
     "rollup-plugin-visualizer": "^5.14.0",
     "source-map-js": "^1.0.2",
+    "sugar-reactive-js": "^1.4.0",
     "tslib": "^2.6.2"
   }
 }
