@@ -498,7 +498,7 @@ export default function createElement(inputEl, callback, fixed = false) {
             }
 
             onMounted(() => {
-
+                console.log(fixed)
 
             })
 
