@@ -2,9 +2,8 @@
 
 ### 引入样式和脚本
     <link rel="stylesheet" href="/datePicker.css"></link>
-    <script src="/sugar.js"></script>
     <script src="/dist/datePicker.js"></script>
-    sugar-js从 https://github.com/1176506184/sugar-js/tree/main/dist 这里下载
+    //不在需要sugar-js依赖了，内置
 
 ### 使用
     <input id="init"/>
