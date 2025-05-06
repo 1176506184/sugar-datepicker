@@ -760,12 +760,12 @@ export default function createElement(inputEl, callback, fixed = false) {
             }
 
             function confirm() {
+                close();
                 if (type.value === 0) {
                     inputEl.value = '公曆:' + getValue().solar;
                 } else {
                     inputEl.value = '農曆:' + getValue().lunar;
                 }
-                close();
                 callback(getValue());
             }
 
