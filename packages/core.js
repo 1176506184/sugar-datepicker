@@ -116,6 +116,14 @@ function calculateFixedPosition(el) {
     return {top, left};
 }
 
+function isPC() {
+    const userAgent = navigator.userAgent;
+    // 排除移动端设备的关键字
+    const mobileKeywords = /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i;
+
+    return !mobileKeywords.test(userAgent);
+}
+
 
 export default function createElement(inputEl, callback, fixed = false) {
     const node = document.createElement('div');
@@ -123,6 +131,7 @@ export default function createElement(inputEl, callback, fixed = false) {
     document.body.append(node);
     const sugarApp = makeSugar({
         bulk() {
+            const [isFixed, setIsFixed] = useState(fixed && isPC());
             const [type, setType] = useState(0);
             let years = generateRange(1800, 2100);
             const hours = ['未知', ...generateRange(0, 23)];
@@ -139,14 +148,27 @@ export default function createElement(inputEl, callback, fixed = false) {
             const [style, setStyle] = useState(`;top:${ev.top}px;left:${ev.left}px`);
             if (fixed) {
                 document.body.addEventListener('click', () => {
-                    setShow(false);
+                    if (isFixed.value) {
+                        setShow(false);
+                    }
                 })
 
                 window.addEventListener('scroll', () => {
-                    setShow(false);
+                    if (isFixed.value) {
+                        setShow(false);
+                    }
                 })
-
             }
+
+            window.addEventListener('resize', () => {
+                if (isPC() && fixed) {
+                    const ev = calculateFixedPosition(inputEl);
+                    setStyle(`;top:${ev.top}px;left:${ev.left}px`);
+                    setIsFixed(true);
+                } else if (fixed) {
+                    setIsFixed(false);
+                }
+            })
 
             useEffect(() => {
                 if (type.value === 0) {
@@ -853,7 +875,9 @@ export default function createElement(inputEl, callback, fixed = false) {
                 wheelHour,
                 wheelMinute,
                 fixed,
-                style
+                style,
+                isFixed,
+                setIsFixed
             }
         }
     })
